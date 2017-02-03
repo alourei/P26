@@ -1,0 +1,122 @@
+###############################################################################
+#                                                                         #
+# THIS TEST GENERATES GAMMA RAYS 4CM FROM THE CENTRE OF THE TARGET 
+# WHICH IS THE ORIGIN. Seeing Resolution
+#  
+################################################################################
+
+/p26/analysis/dirname root_files/
+/p26/analysis/filename Co56_new1
+
+/p26/phys/SelectPhysics LowEnergy_EM_Livermore
+
+
+#/p26/det/setGeThickDetectorThickness 1. cm
+#/p26/det/setGeThinDetectorMate Vacuum
+/p26/det/UseGeThickDetector false
+/p26/det/UseGeThinDetector false
+/p26/det/UseGeThickDetectorCryo false
+/p26/det/UseGeThickDetectorCryoEndCap false
+
+
+### use the LaBr crystal?
+/p26/det/UseLaBrDetector false
+
+### use the NaI Scintillator?
+### NOTE:  Even though it says "Cylinder" here,
+###         the NaI scintillator is likely to be square and is square here!
+
+/p26/det/UseNaICylinder false
+
+
+#### FUTURE FEATURES ####
+
+### use the cubic NaI Scintillator?
+#/p26/det/UseNaICube false
+
+
+### which gamma detector should we use?
+/p26/det/UseSega true
+/p26/det/UseClover false
+
+
+/run/initialize
+#/run/setCutForRegion Target 10 cm
+#/run/setCutForRegion GeThickDetector 0.010 mm
+#/run/setCutForRegion GeThinDetector 0.010 mm
+
+
+### UNCOMMENT TO CREATE A HEPREP FILE
+### BUT ONLY DO A FEW EVENTS!
+
+#/vis/scene/create
+#/vis/open HepRepFile
+#/vis/drawVolume
+#/vis/viewer/flush
+#/vis/scene/add/trajectories
+#/vis/scene/add/hits
+
+
+### what output do you want?
+/run/verbose 0
+/event/verbose 0
+/tracking/verbose 0
+/grdm/verbose 0
+
+### don't mess with this
+#/grdm/noVolumes
+#/grdm/selectVolume Detector
+/grdm/allVolumes
+
+### Setting custom Decay Data
+#/grdm/setRadioactiveDecayFile 63 154 DecayData/Decay_z63.a154
+#/grdm/setPhotoEvaporationFile 64 154 DecayData/Gamma_z64.a154
+
+#######################################
+###         SOURCE INFO             ###
+### COMMENT OUT WHAT YOU DON'T WANT ###
+#######################################
+
+### For gamma decay ###
+#######################                         All
+
+#/gps/source/intensity 1
+#/gps/ion 64 154 0 1719.55
+#/gps/position 0 0 0 cm
+#/gps/ang/type iso
+#/gps/energy 0 keV
+
+#/gps/source/clear
+
+/gps/source/intensity 1
+/gps/particle gamma
+/gps/position 0 0 0 cm
+/gps/ang/type iso
+#/gps/energy 123.1 keV
+#/gps/energy 248.0 keV
+#/gps/energy 591.8 keV
+#/gps/energy 723.3 keV
+#/gps/energy 873.2 keV
+#/gps/energy 996.4 keV
+#/gps/energy 1004.8 keV
+#/gps/energy 1274.5 keV
+#/gps/energy 1596.5 keV
+
+
+/gps/energy 846.8 keV
+
+
+
+
+############
+# No daughter decays in analogue MC mode
+#/grdm/analogueMC 1
+#/grdm/nucleusLimits 90 90 28 28
+#/run/beamOn 15000000
+#/run/beamOn 1
+#/run/beamOn 11
+# No daughter decays in VR MC mode
+#/grdm/analogueMC 0
+#/grdm/BRbias 0
+
+/run/beamOn 1000000

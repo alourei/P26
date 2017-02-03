@@ -1,0 +1,121 @@
+###############################################################################
+#                                                                         #
+# THIS TEST GENERATES GAMMA RAYS 4CM FROM THE CENTRE OF THE TARGET 
+# WHICH IS THE ORIGIN. Seeing Resolution
+#  
+################################################################################
+
+#/p26/analysis/dirname root_files
+/p26/analysis/filename Isomer_test_realistic_300K_vector
+
+/p26/phys/SelectPhysics LowEnergy_EM_Livermore
+
+
+/p26/det/setGeThickDetectorThickness 1. cm
+/p26/det/setGeThickDetectorRadius 4.5 cm
+#/p26/det/setGeThinDetectorMate Vacuum
+/p26/det/UseGeThickDetector true
+
+/p26/det/UseGeThinDetector false
+/p26/det/UseGeThickDetectorCryo true
+/p26/det/UseGeThickDetectorCryoEndCap true
+
+
+### use the LaBr crystal?
+/p26/det/UseLaBrDetector false
+
+### use the NaI Scintillator?
+### NOTE:  Even though it says "Cylinder" here,
+###         the NaI scintillator is likely to be square and is square here!
+
+/p26/det/UseNaICylinder false
+
+
+#### FUTURE FEATURES ####
+
+### use the cubic NaI Scintillator?
+#/p26/det/UseNaICube false
+
+
+### which gamma detector should we use?
+/p26/det/UseSega true
+/p26/det/UseClover false
+
+
+/run/initialize
+#/run/setCutForRegion Target 10 cm
+#/run/setCutForRegion GeThickDetector 0.010 mm
+#/run/setCutForRegion GeThinDetector 0.010 mm
+
+
+### UNCOMMENT TO CREATE A HEPREP FILE
+### BUT ONLY DO A FEW EVENTS!
+
+#/vis/scene/create
+#/vis/open HepRepFile
+#/vis/drawVolume
+#/vis/viewer/flush
+#/vis/scene/add/trajectories
+#/vis/scene/add/hits
+
+
+### what output do you want?
+/run/verbose 0
+/event/verbose 0
+/tracking/verbose 0
+/grdm/verbose 0
+
+### don't mess with this
+#/grdm/noVolumes
+#/grdm/selectVolume Detector
+/grdm/allVolumes
+
+
+
+#######################################
+###         SOURCE INFO             ###
+### COMMENT OUT WHAT YOU DON'T WANT ###
+#######################################
+
+### For gamma decay ###
+#######################                         26Si
+#/gps/source/intensity 1
+#/gps/particle gamma
+#/gps/position 0 0 0 cm
+#/gps/ang/type iso
+#/gps/energy 164.0 keV
+
+
+
+#/gps/source/intensity 1
+/gps/particle ion
+/gps/ion 15 26 0 164.0
+#/gps/particle e-
+#/gps/particle gamma
+/gps/position 0 0 -6 mm
+/gps/direction 0 0 1
+/gps/pos/type Beam
+/gps/pos/sigma_r 2.033 mm
+
+/gps/ang/type beam1d
+/gps/ang/sigma_r 0.27536352 deg
+/gps/ang/rot1 0 0 1
+/gps/ang/rot2 0 1 0
+
+
+
+
+/gps/energy 1820 MeV
+
+# No daughter decays in analogue MC mode
+#/grdm/analogueMC 1
+
+#/grdm/nucleusLimits 26 26 15 15
+#/grdm/setPhotoEvaporationFile 15 26 z15.a26
+
+
+#/run/beamOn 25200000
+# No daughter decays in VR MC mode
+#/grdm/analogueMC 0
+#/grdm/BRbias 0
+/run/beamOn 301780
