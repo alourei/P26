@@ -6,7 +6,7 @@
 ################################################################################
 
 #/p26/analysis/dirname root_files
-/p26/analysis/filename Isomer_test_realistic_500K_vector
+/p26/analysis/filename Isomer_test_realistic_301K_vector
 
 /p26/phys/SelectPhysics LowEnergy_EM_Livermore
 
@@ -119,3 +119,4 @@
 #/grdm/BRbias 0
 #/run/beamOn 500000
 /run/beamOn 301780
+#/run/beamOn 10

@@ -1,6 +1,6 @@
 {
   //TFile *out=new TFile("output.root");
-  TFile *out=new TFile("output_partial.root");
+  TFile *out=new TFile("root_files/output_partial.root");
   TH1F *h[20];
   TCanvas *c=new TCanvas();
   c->Divide(4,5);

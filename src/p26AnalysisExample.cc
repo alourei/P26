@@ -403,6 +403,10 @@ void p26AnalysisExample::BeginOfRunAction(const G4Run */*aRun*/, G4int rank)
 		p26tree->Branch("vtimeGe",&timeGe);
 		p26tree->Branch("vstripX",&stripX);
 		p26tree->Branch("vXpos",&Xpos);
+		p26tree->Branch("vstripY",&stripY);
+		p26tree->Branch("vYpos",&Ypos);
+		p26tree->Branch("vparentname",&vparentname);
+		p26tree->Branch("vpname",&vpname);
 
 	}
 	
@@ -703,6 +707,8 @@ void p26AnalysisExample::BeginOfEventAction(const G4Event */*anEvent*/)
 	Xpos.clear();
 	stripY.clear();
 	Ypos.clear();
+	vparentname.clear();
+	vpname.clear();
 	
 	#endif /* defined (G4ANALYSIS_USE_ROOT) */
 	
@@ -873,6 +879,8 @@ void p26AnalysisExample::EndOfEventAction(const G4Event *evt)
 			stripY.push_back(stripy);	
 			Ypos.push_back(pos.y()/mm);
 			timex[stripx]=getime;
+			vparentname.push_back(parentname);
+			vpname.push_back(name);
 	
 	
 			// technically there are no physical strips in the z direction but

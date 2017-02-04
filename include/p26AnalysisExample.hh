@@ -223,6 +223,8 @@ private:
   std::vector<G4int> stripY;
   std::vector<G4double> Xpos;
   std::vector<G4double> Ypos;
+  std::vector<string> vparentname;
+  std::vector<string> vpname;
 
   G4double goode;
   G4double goodestrip;
